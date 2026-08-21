@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>(function(){try{if(localStorage.getItem("jmi-theme-mode")==="light"){document.documentElement.setAttribute("data-mode","light");}}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aubo Robotics Inventory Management System — Jean Michel Irankunda</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,7 +84,7 @@
             <tr><th>SKU</th><th>Item</th><th>Qty</th><th>Status</th></tr>
             <tr><td>AR-1042</td><td>Servo actuator, 6DOF</td><td>212</td><td class="stat">OK</td></tr>
             <tr><td>AR-1043</td><td>End effector gripper</td><td>4</td><td class="stat">Low stock</td></tr>
-            <tr><td>AR-1044</td><td>Encoder cable, 2m</td><td>0</td><td style="color:#ff6b6b">Blocked &mdash; neg. prevented</td></tr>
+            <tr><td>AR-1044</td><td>Encoder cable, 2m</td><td>0</td><td style="color:var(--fail)">Blocked &mdash; neg. prevented</td></tr>
           </table>
         </div>
         <p class="diagram-caption">Dashboard mockup &mdash; role badge, live search, transaction guardrails</p>

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>(function(){try{if(localStorage.getItem("jmi-theme-mode")==="light"){document.documentElement.setAttribute("data-mode","light");}}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AC Power Adapter Redesign — Jean Michel Irankunda</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,8 +12,8 @@
   .diagram text { font-family: var(--font-mono); fill: var(--ink-dim); }
   .diagram .lbl { font-size: 12px; }
   .diagram .lbl-strong { font-size: 12px; fill: var(--ink); font-weight: 600; }
-  table.compare { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.82rem; }
-  table.compare th, table.compare td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; }
+  table.compare { width: 100%; min-width: 520px; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.82rem; }
+  table.compare th, table.compare td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; white-space: nowrap; }
   table.compare th { color: var(--ink); background: var(--bg); }
   table.compare td { color: var(--ink-dim); }
 </style>
@@ -62,28 +63,28 @@
           <g font-family="var(--font-mono)">
             <rect x="10" y="60" width="150" height="60" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
             <text x="85" y="94" text-anchor="middle" class="lbl">Rectification</text>
-            <text x="85" y="140" text-anchor="middle" class="lbl" fill="#ff9a5a">&minus;1.8% loss</text>
+            <text x="85" y="140" text-anchor="middle" class="lbl" fill="var(--accent)">&minus;1.8% loss</text>
 
             <line x1="160" y1="90" x2="200" y2="90" stroke="var(--ink-dim)"/>
 
             <rect x="200" y="60" width="180" height="60" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
             <text x="290" y="88" text-anchor="middle" class="lbl">LLC resonant</text>
             <text x="290" y="102" text-anchor="middle" class="lbl">converter</text>
-            <text x="290" y="140" text-anchor="middle" class="lbl" fill="#ff9a5a">&minus;3.2% loss (switching)</text>
+            <text x="290" y="140" text-anchor="middle" class="lbl" fill="var(--accent)">&minus;3.2% loss (switching)</text>
 
             <line x1="380" y1="90" x2="420" y2="90" stroke="var(--ink-dim)"/>
 
             <rect x="420" y="60" width="180" height="60" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
             <text x="510" y="88" text-anchor="middle" class="lbl">Synchronous</text>
             <text x="510" y="102" text-anchor="middle" class="lbl">rectification</text>
-            <text x="510" y="140" text-anchor="middle" class="lbl" fill="#ff9a5a">&minus;1.1% loss (conduction)</text>
+            <text x="510" y="140" text-anchor="middle" class="lbl" fill="var(--accent)">&minus;1.1% loss (conduction)</text>
 
             <line x1="600" y1="90" x2="640" y2="90" stroke="var(--ink-dim)"/>
 
             <rect x="640" y="60" width="150" height="60" rx="6" fill="none" stroke="var(--accent)" stroke-width="2"/>
             <text x="715" y="88" text-anchor="middle" class="lbl">Output</text>
             <text x="715" y="102" text-anchor="middle" class="lbl">regulation</text>
-            <text x="715" y="140" text-anchor="middle" class="lbl" fill="#ff9a5a">&minus;0.9% loss (thermal)</text>
+            <text x="715" y="140" text-anchor="middle" class="lbl" fill="var(--accent)">&minus;0.9% loss (thermal)</text>
           </g>
         </svg>
         <p class="diagram-caption">Loss budget annotated at each stage of the conventional power path</p>
@@ -95,12 +96,14 @@
       <h3>Three GaN topologies, compared on more than efficiency.</h3>
       <p>Each candidate topology was evaluated on efficiency, EMI behavior, thermal performance, and cost — with a full verification and test plan proposed for validating the winning design.</p>
 
-      <table class="compare">
-        <tr><th>Topology</th><th>Efficiency</th><th>EMI</th><th>Thermal</th><th>Cost</th></tr>
-        <tr><td>A &mdash; GaN half-bridge LLC</td><td>High</td><td>Moderate</td><td>Low rise</td><td>Medium</td></tr>
-        <tr><td>B &mdash; GaN totem-pole PFC + LLC</td><td>Highest</td><td>Higher</td><td>Lowest rise</td><td>Higher</td></tr>
-        <tr><td>C &mdash; Hybrid Si/GaN</td><td>Moderate</td><td>Lowest</td><td>Moderate</td><td>Lowest</td></tr>
-      </table>
+      <div class="table-scroll">
+        <table class="compare">
+          <tr><th>Topology</th><th>Efficiency</th><th>EMI</th><th>Thermal</th><th>Cost</th></tr>
+          <tr><td>A &mdash; GaN half-bridge LLC</td><td>High</td><td>Moderate</td><td>Low rise</td><td>Medium</td></tr>
+          <tr><td>B &mdash; GaN totem-pole PFC + LLC</td><td>Highest</td><td>Higher</td><td>Lowest rise</td><td>Higher</td></tr>
+          <tr><td>C &mdash; Hybrid Si/GaN</td><td>Moderate</td><td>Lowest</td><td>Moderate</td><td>Lowest</td></tr>
+        </table>
+      </div>
     </div>
 
     <div class="arc-step" data-index="04">

@@ -30,6 +30,8 @@
   --line: #2a2f36;
   --accent: #ff5a1f;
   --accent-ink: #0b0d10;
+  --warn: #ffd166;
+  --fail: #ff6b6b;
 }
 
 /* Engineering theme: steel blue / graphite / safety orange */
@@ -59,6 +61,53 @@
   --steel-soft: #3d7fff26;
   --accent-ink: #06110d;
 }
+
+/* ---------------------------------------------------------------------------
+   Light mode — toggled via [data-mode="light"] on <html>.
+   Neutral (landing/about), Engineering, and CS variants each get a light pass.
+   --------------------------------------------------------------------------- */
+
+:root[data-mode="light"] {
+  --bg: #f5f6f8;
+  --bg-raised: #ffffff;
+  --ink: #14171c;
+  --ink-dim: #565f6b;
+  --line: #dde1e7;
+  --accent: #d9480f;
+  --accent-ink: #ffffff;
+  --warn: #b45309;
+  --fail: #d92d20;
+}
+
+:root[data-mode="light"] [data-theme="engr"] {
+  --bg: #f5f4f1;
+  --bg-raised: #ffffff;
+  --ink: #1b1e22;
+  --ink-dim: #5c6169;
+  --line: #dedbd5;
+  --accent: #d9480f;
+  --accent-soft: #d9480f1f;
+  --steel: #3f5a75;
+  --steel-soft: #3f5a751f;
+  --accent-ink: #ffffff;
+}
+
+:root[data-mode="light"] [data-theme="cs"] {
+  --bg: #f2f6f5;
+  --bg-raised: #ffffff;
+  --ink: #101815;
+  --ink-dim: #4f5c58;
+  --line: #d6e2df;
+  --accent: #0d9488;
+  --accent-soft: #0d94881f;
+  --steel: #2f5fd1;
+  --steel-soft: #2f5fd11f;
+  --accent-ink: #ffffff;
+}
+
+/* Landing page split-panel accents also need to dial back from neon in light mode */
+:root[data-mode="light"] .split-panel.engr { --accent: #d9480f; }
+:root[data-mode="light"] .split-panel.cs { --accent: #0d9488; }
 
 * { box-sizing: border-box; }
 
@@ -118,6 +167,7 @@ p { color: var(--ink-dim); margin: 0 0 var(--space-2); }
   align-items: center;
   justify-content: space-between;
   height: 64px;
+  gap: var(--space-2);
 }
 
 .brand {
@@ -126,6 +176,15 @@ p { color: var(--ink-dim); margin: 0 0 var(--space-2); }
   letter-spacing: 0.02em;
   color: var(--ink);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+/* Long "JEAN MICHEL IRANKUNDA" brand (landing/about) needs more room to
+   shrink before ellipsis kicks in on narrow phones */
+@media (max-width: 420px) {
+  .brand { font-size: 0.72rem; }
 }
 
 .brand strong { color: var(--accent); }
@@ -149,14 +208,11 @@ p { color: var(--ink-dim); margin: 0 0 var(--space-2); }
   transition: background 0.2s ease, color 0.2s ease;
 }
 
-.nav-toggle a.active,
 .nav-toggle a:hover {
-  color: var(--accent-ink);
+  color: var(--ink);
 }
 
-[data-theme="engr"] .nav-toggle a.active { background: #ff5a1f; }
-[data-theme="cs"] .nav-toggle a.active { background: #33ffc7; }
-body:not([data-theme]) .nav-toggle a.active { background: #ff5a1f; color: #0b0d10; }
+.nav-toggle a.active { background: var(--accent); color: var(--accent-ink); }
 
 .nav-links {
   display: none;
@@ -364,9 +420,45 @@ section { padding: var(--space-5) 0; }
   border-radius: var(--radius-lg);
   padding: var(--space-3);
   margin: var(--space-3) 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .diagram svg { width: 100%; height: auto; }
+
+/* Below ~640px, diagram text would shrink past legibility if forced to 100% width.
+   Give SVGs a floor width and let the container scroll horizontally instead. */
+@media (max-width: 640px) {
+  .diagram svg {
+    width: auto;
+    min-width: 560px;
+    max-width: none;
+  }
+}
+
+/* Tables (e.g. GaN topology comparison) scroll horizontally rather than compress */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: var(--space-3) 0;
+}
+.table-scroll table { margin: 0; }
+
+/* CSS Grid gives items an automatic content-based minimum width, which lets a
+   wide descendant (like a .diagram with a min-width floor) force its whole
+   grid track — and the page — wider than the viewport instead of just
+   scrolling internally. Explicit min-width: 0 on grid items fixes this. */
+.arc-step,
+.diagram-row > *,
+.before-after > *,
+.progression > *,
+.credential-grid > *,
+.project-grid > *,
+.timeline-grid > *,
+.dash-grid > *,
+.split-panel {
+  min-width: 0;
+}
 
 .diagram-caption {
   font-family: var(--font-mono);
@@ -464,6 +556,10 @@ section { padding: var(--space-5) 0; }
   transition: background 0.25s ease;
 }
 
+@media (max-width: 859px) {
+  .split-panel { min-height: 0; padding: var(--space-4) var(--space-3); }
+}
+
 .split-panel.engr { --accent: #ff5a1f; }
 .split-panel.cs { --accent: #33ffc7; }
 
@@ -479,4 +575,69 @@ section { padding: var(--space-5) 0; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* --------------------------- Theme toggle (light/dark) ---------------------- */
+
+.theme-hotspot {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 110px;
+  height: 110px;
+  z-index: 500;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 20px;
+  pointer-events: none;
+}
+
+/* Non-touch devices: the whole corner zone is hoverable so the button can be
+   discovered without needing to land the pointer on an invisible target. */
+.theme-hotspot.hover-enabled {
+  pointer-events: auto;
+}
+
+.theme-toggle {
+  pointer-events: auto;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--bg-raised);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px) scale(0.88);
+  transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.2s ease, background 0.3s ease, color 0.3s ease;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+.theme-toggle svg { width: 20px; height: 20px; display: block; }
+
+.theme-hotspot:hover .theme-toggle,
+.theme-toggle:focus-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Touch devices can't hover — keep it dimly visible so it's discoverable, full opacity on tap */
+.theme-toggle.is-touch {
+  opacity: 0.55;
+  transform: translateY(0) scale(1);
+}
+
+.theme-toggle.is-touch:active,
+.theme-toggle.is-touch:focus-visible {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle { transition: none; }
 }

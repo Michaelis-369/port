@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>(function(){try{if(localStorage.getItem("jmi-theme-mode")==="light"){document.documentElement.setAttribute("data-mode","light");}}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Off-Grid Aeroponic Vertical Farming System — Jean Michel Irankunda</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +21,7 @@
   @media (min-width: 760px) { .before-after { grid-template-columns: 1fr 1fr; } }
   .ba-panel { text-align: center; }
   .ba-panel .verdict { font-family: var(--font-mono); font-size: 0.8rem; margin-top: var(--space-1); padding: 6px 12px; border-radius: 999px; display: inline-block; }
-  .ba-panel.fail .verdict { color: #ff6b6b; border: 1px solid #ff6b6b55; }
+  .ba-panel.fail .verdict { color: var(--fail); border: 1px solid var(--fail)55; }
   .ba-panel.pass .verdict { color: var(--accent); border: 1px solid var(--accent); }
   .spec-list { list-style: none; padding: 0; margin: 0; font-family: var(--font-mono); font-size: 0.85rem; }
   .spec-list li { display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid var(--line); }
@@ -81,15 +82,15 @@
               <rect x="150" y="20" width="60" height="30" rx="4" fill="none" stroke="var(--ink-dim)"/>
               <text x="180" y="40" text-anchor="middle" class="lbl">Pump</text>
               <line x1="180" y1="50" x2="180" y2="80" stroke="var(--ink-dim)"/>
-              <polygon points="170,80 190,80 180,100" fill="none" stroke="#ff6b6b"/>
+              <polygon points="170,80 190,80 180,100" fill="none" stroke="var(--fail)"/>
               <text x="180" y="118" text-anchor="middle" class="lbl">Nozzle</text>
-              <g stroke="#ff6b6b" stroke-width="1.4" opacity="0.7">
+              <g stroke="var(--fail)" stroke-width="1.4" opacity="0.7">
                 <line x1="165" y1="100" x2="140" y2="150"/>
                 <line x1="175" y1="102" x2="160" y2="155"/>
                 <line x1="185" y1="102" x2="200" y2="155"/>
                 <line x1="195" y1="100" x2="220" y2="150"/>
               </g>
-              <text x="180" y="175" text-anchor="middle" class="lbl" fill="#ff6b6b">Uneven / clogged spray</text>
+              <text x="180" y="175" text-anchor="middle" class="lbl" fill="var(--fail)">Uneven / clogged spray</text>
               <text x="20" y="25" class="lbl">Config 01&ndash;10</text>
             </svg>
           </div>
