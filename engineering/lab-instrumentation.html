@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wind Tunnel &amp; Solar Lab Instrumentation — Jean Michel Irankunda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/base.css">
+<style>
+  .diagram text { font-family: var(--font-mono); fill: var(--ink-dim); }
+  .diagram .lbl { font-size: 12px; }
+  .diagram .lbl-strong { font-size: 12px; fill: var(--ink); font-weight: 600; }
+  .time-compare { display: flex; align-items: flex-end; gap: var(--space-4); justify-content: center; padding: var(--space-2) 0; }
+  .time-bar { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .time-bar .bar { width: 60px; background: var(--ink-dim); border-radius: 4px 4px 0 0; }
+  .time-bar.after .bar { background: var(--accent); }
+  .time-bar .val { font-family: var(--font-mono); font-size: 0.85rem; }
+</style>
+</head>
+<body data-theme="engr">
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand" href="../index.html">JMI &middot; <strong>ENGR</strong></a>
+    <div class="nav-toggle">
+      <a class="active" href="index.html">Engineering</a>
+      <a href="../cs/index.html">CS / AI</a>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">&larr; All engineering projects</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero container">
+  <span class="eyebrow">Research Assistant &middot; Swarthmore Solar Energy &amp; Wind Tunnel Labs</span>
+  <h1>Wind Tunnel &amp; Solar Lab Instrumentation</h1>
+  <p style="max-width:620px">Instrumentation, calibration pipelines, and a mechanism redesign that turned a hazardous manual setup step into a repeatable, indexed adjustment.</p>
+  <div class="meta-row">
+    <span>Research Assistant</span>
+    <span>Solar Energy &amp; Wind Tunnel Labs</span>
+  </div>
+</header>
+
+<section class="container pullquote">
+  <div class="num">71%</div>
+  <div class="label">Reduction in angle-of-attack setup time (7 hrs &rarr; 2 hrs)</div>
+</section>
+
+<section class="container">
+  <div class="arc">
+
+    <div class="arc-step" data-index="01">
+      <span class="arc-kicker">The Constraint</span>
+      <h3>Manual angle-of-attack adjustment was slow, and it was a safety problem.</h3>
+      <p>Setting angle of attack on the wind tunnel rig required manual adjustment that took hours and posed a hazard every time it happened — a bottleneck for both repeatability and lab safety.</p>
+    </div>
+
+    <div class="arc-step" data-index="02">
+      <span class="arc-kicker">The Decision</span>
+      <h3>Replace manual adjustment with a mechanism, not a procedure.</h3>
+      <p>Rather than write a safer manual procedure, the decision was to design and fabricate a wall-mounted unistrut mechanism with precision index stops — removing the manual hazard by removing the manual step.</p>
+
+      <div class="diagram-row cols-2">
+        <div class="diagram" style="margin:0">
+          <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="20" class="lbl-strong">Unistrut angle-of-attack rig</text>
+            <rect x="20" y="40" width="16" height="160" fill="none" stroke="var(--steel)" stroke-width="2"/>
+            <text x="28" y="36" text-anchor="middle" class="lbl">Unistrut</text>
+            <g stroke="var(--accent)" stroke-width="2">
+              <line x1="36" y1="70" x2="70" y2="70"/>
+              <line x1="36" y1="100" x2="70" y2="100"/>
+              <line x1="36" y1="130" x2="70" y2="130"/>
+              <line x1="36" y1="160" x2="70" y2="160"/>
+            </g>
+            <text x="80" y="74" class="lbl">Index stop 1</text>
+            <text x="80" y="104" class="lbl">Index stop 2</text>
+            <text x="80" y="134" class="lbl">Index stop 3</text>
+            <text x="80" y="164" class="lbl">Index stop 4</text>
+            <line x1="36" y1="130" x2="180" y2="130" stroke="var(--ink-dim)" stroke-dasharray="3 3"/>
+            <polygon points="180,130 220,110 220,150" fill="none" stroke="var(--accent)" stroke-width="2"/>
+            <text x="230" y="132" class="lbl">Test article</text>
+          </svg>
+        </div>
+        <div class="diagram" style="margin:0">
+          <div class="time-compare">
+            <div class="time-bar">
+              <div class="bar" style="height:120px"></div>
+              <span class="val">7 hrs</span>
+              <span class="diagram-caption" style="margin:0">Before</span>
+            </div>
+            <div class="time-bar after">
+              <div class="bar" style="height:34px"></div>
+              <span class="val" style="color:var(--accent)">2 hrs</span>
+              <span class="diagram-caption" style="margin:0">After</span>
+            </div>
+          </div>
+          <p class="diagram-caption">Setup time per angle-of-attack configuration</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="arc-step" data-index="03">
+      <span class="arc-kicker">The Build</span>
+      <h3>Full instrumentation stack, plus a calibration pipeline adopted lab-wide.</h3>
+      <ul>
+        <li>PV panels installed on custom mounting frames; all electrical connections and grounding wired by hand</li>
+        <li>Charge controllers configured; pyranometer and viscometer commissioned</li>
+        <li>Wind tunnel instrumented with force sensors, pressure taps, and velocity probes, with EMI-conscious signal routing</li>
+        <li>Python pipelines (Pandas / NumPy / Matplotlib) to clean and calibrate a 12-month solar irradiance dataset &mdash; bias detection and drift correction, formally adopted into lab protocol</li>
+      </ul>
+
+      <div class="diagram">
+        <svg viewBox="0 0 780 200" xmlns="http://www.w3.org/2000/svg">
+          <text x="10" y="20" class="lbl-strong">12-month irradiance calibration</text>
+          <line x1="20" y1="170" x2="760" y2="170" stroke="var(--line)"/>
+          <polyline points="20,150 100,100 180,130 260,90 340,140 420,80 500,120 580,70 660,110 740,60" fill="none" stroke="var(--ink-dim)" stroke-width="1.5" opacity="0.6"/>
+          <polyline points="20,140 100,110 180,120 260,100 340,115 420,95 500,105 580,88 660,98 740,80" fill="none" stroke="var(--accent)" stroke-width="2.4"/>
+          <text x="740" y="55" text-anchor="end" class="lbl" fill="var(--ink-dim)">Raw</text>
+          <text x="740" y="130" text-anchor="end" class="lbl" fill="var(--accent)">Cleaned / drift-corrected</text>
+        </svg>
+        <p class="diagram-caption">Bias detection and drift correction applied to raw sensor readings across 12 months</p>
+      </div>
+    </div>
+
+    <div class="arc-step" data-index="04">
+      <span class="arc-kicker">The Result</span>
+      <h3>Adopted into standard lab procedure.</h3>
+      <p>The unistrut mechanism cut setup time 71% (7 hours to 2 hours), eliminated a hazardous manual adjustment, and was adopted into standard lab procedure. The calibration pipeline's bias-correction methodology was likewise formally adopted into lab protocol.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="container">
+  <hr class="hairline">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-2)">
+    <a class="btn" href="universal-controller.html">&larr; Universal Controller</a>
+    <a class="btn" href="ac-adapter.html">AC Power Adapter Redesign &rarr;</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 Jean Michel Irankunda</span>
+    <span><a href="index.html">All engineering projects</a></span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Self-Directed ML Curriculum — Jean Michel Irankunda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/base.css">
+<style>
+  .progression { display: grid; grid-template-columns: 1fr; gap: var(--space-2); }
+  @media (min-width: 760px) { .progression { grid-template-columns: repeat(3, 1fr); } }
+  .prog-step { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-md); padding: var(--space-3); text-align: center; }
+  .prog-step .tag { display: inline-block; margin-bottom: var(--space-2); }
+  .prog-step .content { font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink); text-align: left; white-space: pre-wrap; }
+  .week-track { display: flex; flex-wrap: wrap; gap: 6px; }
+  .week { font-family: var(--font-mono); font-size: 0.72rem; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-dim); }
+  .week.done { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body data-theme="cs">
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand" href="../index.html">JMI &middot; <strong>CS/AI</strong></a>
+    <div class="nav-toggle">
+      <a href="../engineering/index.html">Engineering</a>
+      <a class="active" href="index.html">CS / AI</a>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">&larr; All CS / AI projects</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero container">
+  <span class="eyebrow">Self-directed</span>
+  <h1>Self-Directed ML Curriculum</h1>
+  <p style="max-width:620px">An eight-week structured curriculum built to understand machine learning from first principles before reaching for a framework.</p>
+</header>
+
+<section class="container pullquote">
+  <div class="num">8 wks</div>
+  <div class="label">Structured, depth-first curriculum</div>
+</section>
+
+<section class="container">
+  <div class="arc">
+
+    <div class="arc-step" data-index="01">
+      <span class="arc-kicker">The Constraint</span>
+      <h3>Frameworks hide the math that makes them work.</h3>
+      <p>Jumping straight to TensorFlow or scikit-learn teaches API surface, not mechanism. The goal was to actually understand gradient descent, distance metrics, and backpropagation well enough to implement them, not just call them.</p>
+    </div>
+
+    <div class="arc-step" data-index="02">
+      <span class="arc-kicker">The Decision</span>
+      <h3>Implement from scratch first. Frameworks second.</h3>
+      <p>Every algorithm was implemented in raw NumPy before ever touching a framework equivalent &mdash; forcing an honest confrontation with the underlying math rather than trusting a library's abstraction.</p>
+
+      <div class="progression">
+        <div class="prog-step">
+          <span class="tag">Step 1</span>
+          <div class="content mono">&theta; := &theta; - &alpha;&nabla;J(&theta;)
+
+argmin ||x&#8322; - &mu;&#8342;||&#178;</div>
+          <p class="diagram-caption">Math notation</p>
+        </div>
+        <div class="prog-step">
+          <span class="tag">Step 2</span>
+          <div class="content mono">for _ in range(epochs):
+    grad = X.T @ (X@w - y) / n
+    w -= lr * grad</div>
+          <p class="diagram-caption">NumPy implementation</p>
+        </div>
+        <div class="prog-step">
+          <span class="tag">Step 3</span>
+          <div class="content mono">model = keras.Sequential([
+  layers.Dense(64, "relu"),
+  layers.Dense(1)
+])</div>
+          <p class="diagram-caption">Framework implementation</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="arc-step" data-index="03">
+      <span class="arc-kicker">The Build</span>
+      <h3>From linear regression to CNNs, in eight weeks.</h3>
+      <ul>
+        <li>Implemented from scratch in NumPy: linear regression, logistic regression, K-means, PCA, and neural networks</li>
+        <li>Extended into TensorFlow/Keras for CNNs, RNNs, and model deployment</li>
+      </ul>
+
+      <div class="week-track" style="margin-top:var(--space-2)">
+        <span class="week done">Wk 1 &middot; Linear regression</span>
+        <span class="week done">Wk 2 &middot; Logistic regression</span>
+        <span class="week done">Wk 3 &middot; K-means</span>
+        <span class="week done">Wk 4 &middot; PCA</span>
+        <span class="week done">Wk 5 &middot; Neural nets (NumPy)</span>
+        <span class="week done">Wk 6 &middot; CNNs (Keras)</span>
+        <span class="week done">Wk 7 &middot; RNNs (Keras)</span>
+        <span class="week done">Wk 8 &middot; Deployment</span>
+      </div>
+    </div>
+
+    <div class="arc-step" data-index="04">
+      <span class="arc-kicker">The Result</span>
+      <h3>Framework fluency backed by first-principles understanding.</h3>
+      <p>The curriculum produced working from-scratch implementations of every core algorithm and a framework-based extension into deep learning &mdash; the same depth-first approach applied throughout the rest of this portfolio.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="container">
+  <hr class="hairline">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-2)">
+    <a class="btn" href="aubo-inventory.html">&larr; Aubo Inventory System</a>
+    <a class="btn" href="index.html">All CS / AI projects</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 Jean Michel Irankunda</span>
+    <span><a href="index.html">All CS / AI projects</a></span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

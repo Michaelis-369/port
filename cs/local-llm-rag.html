@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local LLM Inference System &amp; RAG Pipeline — Jean Michel Irankunda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/base.css">
+<style>
+  .diagram text { font-family: var(--font-mono); fill: var(--ink-dim); }
+  .diagram .lbl { font-size: 12px; }
+  .diagram .lbl-strong { font-size: 12px; fill: var(--ink); font-weight: 600; }
+</style>
+</head>
+<body data-theme="cs">
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand" href="../index.html">JMI &middot; <strong>CS/AI</strong></a>
+    <div class="nav-toggle">
+      <a href="../engineering/index.html">Engineering</a>
+      <a class="active" href="index.html">CS / AI</a>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">&larr; All CS / AI projects</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero container">
+  <span class="eyebrow">Infrastructure &middot; Local Inference</span>
+  <h1>Local LLM Inference System<br>&amp; RAG Pipeline</h1>
+  <p style="max-width:620px">CPU-based local LLaMA inference with privacy-aware query routing, backed by a full retrieval-augmented generation stack for document-grounded answers.</p>
+</header>
+
+<section class="container pullquote">
+  <div class="num">60%+</div>
+  <div class="label">Reduction in cloud API calls via local routing</div>
+</section>
+
+<section class="container">
+  <div class="arc">
+
+    <div class="arc-step" data-index="01">
+      <span class="arc-kicker">The Constraint</span>
+      <h3>Not every query should leave the machine.</h3>
+      <p>Sending every query to a cloud LLM is expensive and, for privacy-sensitive prompts, undesirable regardless of cost. The system needed a way to keep sensitive or low-complexity queries entirely local while still using the cloud where it genuinely adds capability.</p>
+    </div>
+
+    <div class="arc-step" data-index="02">
+      <span class="arc-kicker">The Decision</span>
+      <h3>Route by privacy classification and compute constraint, not by default.</h3>
+      <p>Rather than route everything to the cloud or everything locally, an intelligent router classifies each query by privacy sensitivity and compute requirement before dispatching it &mdash; local CPU-based LLaMA inference for what it can handle, cloud only when necessary.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+          <g font-family="var(--font-mono)">
+            <rect x="10" y="70" width="110" height="50" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+            <text x="65" y="100" text-anchor="middle" class="lbl">Document</text>
+
+            <line x1="120" y1="95" x2="160" y2="95" stroke="var(--accent)"/>
+            <rect x="160" y="70" width="90" height="50" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+            <text x="205" y="100" text-anchor="middle" class="lbl">Chunk</text>
+
+            <line x1="250" y1="95" x2="290" y2="95" stroke="var(--accent)"/>
+            <rect x="290" y="70" width="90" height="50" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+            <text x="335" y="100" text-anchor="middle" class="lbl">Embed</text>
+
+            <line x1="380" y1="95" x2="420" y2="95" stroke="var(--accent)"/>
+            <rect x="420" y="70" width="110" height="50" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+            <text x="475" y="100" text-anchor="middle" class="lbl">Vector store</text>
+
+            <line x1="475" y1="30" x2="475" y2="70" stroke="var(--ink-dim)"/>
+            <text x="475" y="20" text-anchor="middle" class="lbl">Query</text>
+
+            <line x1="530" y1="95" x2="570" y2="95" stroke="var(--accent)"/>
+            <rect x="570" y="55" width="140" height="80" rx="6" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+            <text x="640" y="88" text-anchor="middle" class="lbl-strong">Routing</text>
+            <text x="640" y="104" text-anchor="middle" class="lbl">decision</text>
+
+            <line x1="710" y1="80" x2="750" y2="55" stroke="var(--ink-dim)"/>
+            <text x="720" y="45" class="lbl">Local CPU</text>
+            <line x1="710" y1="110" x2="750" y2="140" stroke="var(--ink-dim)"/>
+            <text x="720" y="160" class="lbl">Cloud API</text>
+          </g>
+        </svg>
+        <p class="diagram-caption">Document &rarr; chunk &rarr; embed &rarr; vector store &rarr; query &rarr; routing decision &rarr; local or cloud inference</p>
+      </div>
+    </div>
+
+    <div class="arc-step" data-index="03">
+      <span class="arc-kicker">The Build</span>
+      <h3>A full RAG stack, tuned against measured retrieval precision.</h3>
+      <ul>
+        <li>PDF parsing, chunking, and embedding generation feeding a vector store index (LangChain / LlamaIndex)</li>
+        <li>CPU-based local LLaMA inference with intelligent query routing by privacy classification and compute constraint</li>
+        <li>Evaluation harness benchmarking retrieval precision across prompt variations</li>
+        <li>Chunking and retrieval parameters iterated based on measured evaluation scores, not intuition</li>
+      </ul>
+
+      <div class="diagram">
+        <svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+          <text x="10" y="20" class="lbl-strong">Retrieval precision by chunking strategy</text>
+          <line x1="20" y1="150" x2="660" y2="150" stroke="var(--line)"/>
+          <g>
+            <rect x="60" y="90" width="60" height="60" fill="none" stroke="var(--ink-dim)"/>
+            <text x="90" y="168" text-anchor="middle" class="lbl">256 tok</text>
+            <text x="90" y="82" text-anchor="middle" class="lbl">0.71</text>
+
+            <rect x="180" y="60" width="60" height="90" fill="none" stroke="var(--accent)" stroke-width="2"/>
+            <text x="210" y="168" text-anchor="middle" class="lbl">512 tok</text>
+            <text x="210" y="52" text-anchor="middle" class="lbl" fill="var(--accent)">0.86</text>
+
+            <rect x="300" y="80" width="60" height="70" fill="none" stroke="var(--ink-dim)"/>
+            <text x="330" y="168" text-anchor="middle" class="lbl">1024 tok</text>
+            <text x="330" y="72" text-anchor="middle" class="lbl">0.79</text>
+
+            <rect x="420" y="100" width="60" height="50" fill="none" stroke="var(--ink-dim)"/>
+            <text x="450" y="168" text-anchor="middle" class="lbl">no overlap</text>
+            <text x="450" y="92" text-anchor="middle" class="lbl">0.68</text>
+
+            <rect x="540" y="65" width="60" height="85" fill="none" stroke="var(--accent)" stroke-width="2"/>
+            <text x="570" y="168" text-anchor="middle" class="lbl">w/ overlap</text>
+            <text x="570" y="57" text-anchor="middle" class="lbl" fill="var(--accent)">0.84</text>
+          </g>
+        </svg>
+        <p class="diagram-caption">Precision benchmark used to select chunk size and overlap parameters</p>
+      </div>
+    </div>
+
+    <div class="arc-step" data-index="04">
+      <span class="arc-kicker">The Result</span>
+      <h3>Most queries never leave the machine.</h3>
+      <p>Intelligent routing cut cloud API calls by more than 60%, with retrieval precision measured and iterated rather than assumed &mdash; a system tuned on evidence at every stage.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="container">
+  <hr class="hairline">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-2)">
+    <a class="btn" href="plurilock.html">&larr; Plurilock Platform</a>
+    <a class="btn" href="ocean-mini-agent.html">Ocean Mini Agent &rarr;</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 Jean Michel Irankunda</span>
+    <span><a href="index.html">All CS / AI projects</a></span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

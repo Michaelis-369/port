@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plurilock AI Content &amp; Automation Platform — Jean Michel Irankunda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/base.css">
+<style>
+  .diagram text { font-family: var(--font-mono); fill: var(--ink-dim); }
+  .diagram .lbl { font-size: 12px; }
+  .diagram .lbl-strong { font-size: 12px; fill: var(--ink); font-weight: 600; }
+  .big-compare { display: grid; grid-template-columns: 1fr; gap: var(--space-3); text-align: center; }
+  @media (min-width: 700px) { .big-compare { grid-template-columns: 1fr auto 1fr; align-items: center; } }
+  .big-compare .num { font-family: var(--font-mono); font-weight: 700; font-size: clamp(2.2rem, 6vw, 3.2rem); }
+  .big-compare .before .num { color: var(--ink-dim); }
+  .big-compare .after .num { color: var(--accent); }
+  .big-compare .arrow-mid { font-family: var(--font-mono); font-size: 1.6rem; color: var(--ink-dim); }
+  .dash-mock { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-md); padding: var(--space-3); }
+  .dash-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-2); }
+  @media (min-width: 700px) { .dash-grid { grid-template-columns: repeat(3, 1fr); } }
+  .dash-tile { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-2); }
+  .dash-tile .tlabel { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+  .dash-tile .tval { font-family: var(--font-mono); font-size: 1.5rem; color: var(--accent); margin-top: 4px; }
+</style>
+</head>
+<body data-theme="cs">
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand" href="../index.html">JMI &middot; <strong>CS/AI</strong></a>
+    <div class="nav-toggle">
+      <a href="../engineering/index.html">Engineering</a>
+      <a class="active" href="index.html">CS / AI</a>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">&larr; All CS / AI projects</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero container">
+  <span class="eyebrow">Flagship &middot; Production</span>
+  <h1>Plurilock AI Content<br>&amp; Automation Platform</h1>
+  <p style="max-width:620px">Software Development &amp; AI Automation Intern at Plurilock Security, a publicly traded cybersecurity company. Built as sole engineer in the first term; invited back for a second term to scale the platform into multi-agent infrastructure.</p>
+  <div class="meta-row">
+    <span><strong>Term 1</strong> Dec 2025&ndash;Jan 2026</span>
+    <span><strong>Term 2</strong> Jun&ndash;Aug 2026</span>
+    <span>Invited back based on Term 1 impact</span>
+  </div>
+</header>
+
+<section class="container pullquote">
+  <div class="num">97%</div>
+  <div class="label">Time reduction per post &mdash; 5 hrs to 10 min</div>
+</section>
+
+<section class="container">
+  <div class="arc">
+
+    <div class="arc-step" data-index="01">
+      <span class="arc-kicker">The Constraint</span>
+      <h3>Manual content production didn't scale, and neither did its cost.</h3>
+      <p>Producing a single piece of AI-related content took roughly 5 hours of manual work and cost about $185 once labor was accounted for &mdash; a pace that couldn't support the cadence the marketing team actually needed.</p>
+    </div>
+
+    <div class="arc-step" data-index="02">
+      <span class="arc-kicker">The Decision</span>
+      <h3>Build the whole pipeline, not a prompt template.</h3>
+      <p>Rather than hand editors a single-shot prompt, the platform was architected around persona-based prompt chaining &mdash; multiple structured passes through the Claude API, each shaping tone, structure, and accuracy &mdash; with sanitized output going straight to WordPress. That end-to-end ownership is what took the process from hours to minutes.</p>
+
+      <div class="big-compare">
+        <div class="before">
+          <div class="num">$185</div>
+          <div class="diagram-caption" style="margin:0">Cost / post &mdash; before</div>
+        </div>
+        <div class="arrow-mid">&rarr;</div>
+        <div class="after">
+          <div class="num">$2.75</div>
+          <div class="diagram-caption" style="margin:0">Cost / post &mdash; after (98.5% reduction)</div>
+        </div>
+      </div>
+      <div class="big-compare">
+        <div class="before">
+          <div class="num">5 hrs</div>
+          <div class="diagram-caption" style="margin:0">Time / post &mdash; before</div>
+        </div>
+        <div class="arrow-mid">&rarr;</div>
+        <div class="after">
+          <div class="num">10 min</div>
+          <div class="diagram-caption" style="margin:0">Time / post &mdash; after (97% reduction)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arc-step" data-index="03">
+      <span class="arc-kicker">The Build</span>
+      <h3>Term 1 &mdash; a complete platform, solo.</h3>
+      <ul>
+        <li>Python/Flask backend with Claude API integration and persona-based prompt chaining architecture</li>
+        <li>Google OAuth 2.0 with email-allowlist role-based access control</li>
+        <li>Real-time API cost tracking dashboard</li>
+        <li>HTML sanitization pipeline for direct WordPress publishing &mdash; zero manual reformatting</li>
+      </ul>
+
+      <div class="diagram">
+        <svg viewBox="0 0 780 220" xmlns="http://www.w3.org/2000/svg">
+          <text x="10" y="20" class="lbl-strong">System architecture</text>
+          <rect x="20" y="40" width="130" height="50" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+          <text x="85" y="70" text-anchor="middle" class="lbl">Google OAuth</text>
+
+          <rect x="20" y="110" width="130" height="50" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+          <text x="85" y="140" text-anchor="middle" class="lbl">Allowlist RBAC</text>
+
+          <line x1="150" y1="65" x2="200" y2="90" stroke="var(--ink-dim)"/>
+          <line x1="150" y1="135" x2="200" y2="100" stroke="var(--ink-dim)"/>
+
+          <rect x="200" y="65" width="180" height="70" rx="6" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+          <text x="290" y="94" text-anchor="middle" class="lbl-strong">Flask backend</text>
+          <text x="290" y="112" text-anchor="middle" class="lbl">Prompt chaining</text>
+
+          <line x1="380" y1="100" x2="430" y2="100" stroke="var(--accent)" stroke-width="2"/>
+          <polygon points="430,94 430,106 442,100" fill="var(--accent)"/>
+
+          <rect x="442" y="65" width="140" height="70" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+          <text x="512" y="94" text-anchor="middle" class="lbl">Claude API</text>
+          <text x="512" y="112" text-anchor="middle" class="lbl">(persona chain)</text>
+
+          <line x1="290" y1="135" x2="290" y2="160" stroke="var(--ink-dim)"/>
+          <rect x="200" y="160" width="180" height="46" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+          <text x="290" y="188" text-anchor="middle" class="lbl">HTML sanitize &rarr; WordPress</text>
+
+          <line x1="582" y1="80" x2="640" y2="60" stroke="var(--ink-dim)"/>
+          <line x1="582" y1="120" x2="640" y2="140" stroke="var(--ink-dim)"/>
+          <rect x="640" y="35" width="130" height="45" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+          <text x="705" y="62" text-anchor="middle" class="lbl">EC2 (inference)</text>
+          <rect x="640" y="120" width="130" height="45" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+          <text x="705" y="147" text-anchor="middle" class="lbl">Lightsail (web)</text>
+        </svg>
+        <p class="diagram-caption">OAuth/RBAC gate &rarr; Flask backend &rarr; Claude API &rarr; sanitize &rarr; publish, with compute split across EC2 / Lightsail</p>
+      </div>
+
+      <h3 style="margin-top:var(--space-4)">Term 2 &mdash; multi-agent infrastructure</h3>
+      <ul>
+        <li>AWS EC2 for compute-heavy inference and Lightsail for web-facing services, separated into service tiers for cost and availability</li>
+        <li>Real-time observability platform tracking agent performance, latency, cost, and reliability</li>
+        <li>RFP automation pipeline: ingest &rarr; requirement extraction &rarr; capability matching &rarr; draft generation</li>
+        <li>Evaluation frameworks measuring output quality per workflow category</li>
+      </ul>
+
+      <div class="dash-mock">
+        <div class="diagram-caption" style="margin:0 0 8px;text-align:left">Observability platform &mdash; live agent metrics (illustrative)</div>
+        <div class="dash-grid">
+          <div class="dash-tile"><div class="tlabel">P50 latency</div><div class="tval">1.8s</div></div>
+          <div class="dash-tile"><div class="tlabel">Cost / task</div><div class="tval">$0.04</div></div>
+          <div class="dash-tile"><div class="tlabel">Reliability</div><div class="tval">99.2%</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arc-step" data-index="04">
+      <span class="arc-kicker">The Result</span>
+      <h3>Adopted immediately, scaled from weekly to daily.</h3>
+      <p>The platform was adopted immediately after Term 1 and the content cadence scaled from weekly to daily. Term 1 impact was strong enough that Jean Michel was invited back for a second term to build out multi-agent infrastructure across HR, marketing, and operations.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="container">
+  <hr class="hairline">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-2)">
+    <a class="btn" href="index.html">&larr; All CS / AI projects</a>
+    <a class="btn" href="local-llm-rag.html">Local LLM &amp; RAG Pipeline &rarr;</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 Jean Michel Irankunda</span>
+    <span><a href="index.html">All CS / AI projects</a></span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

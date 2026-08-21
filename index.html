@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jean Michel Irankunda — Engineering &amp; Computer Science</title>
+<meta name="description" content="Portfolio of Jean Michel Irankunda — Swarthmore Engineering &amp; Computer Science. Physical systems and AI systems, built from constraint to result.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<style>
+  body { background: #0b0d10; }
+  .landing-nav .container { justify-content: center; }
+  .landing-hero { text-align: center; padding: var(--space-6) 0 var(--space-4); }
+  .landing-hero .name { font-family: var(--font-mono); font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase; color: #7d8894; margin-bottom: var(--space-2); }
+  .landing-hero h1 { font-size: clamp(2.2rem, 7vw, 4.2rem); }
+  .landing-hero h1 span.o { color: #ff5a1f; }
+  .landing-hero h1 span.c { color: #33ffc7; }
+  .landing-hero p.sub { max-width: 560px; margin: var(--space-2) auto 0; color: #a4acb6; }
+  .split-panel h2 { display: flex; align-items: center; gap: 12px; }
+  .split-panel .arrow { font-family: var(--font-mono); font-size: 1.5rem; transition: transform 0.2s ease; }
+  .split-panel:hover .arrow { transform: translateX(6px); }
+  .split-panel .swatch-row { display: flex; gap: 8px; margin: var(--space-2) 0 var(--space-3); }
+  .swatch { width: 22px; height: 22px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.15); }
+  .split-panel ul.plist { list-style: none; padding: 0; margin: 0 0 var(--space-3); font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-dim); }
+  .split-panel ul.plist li { padding: 6px 0; border-top: 1px solid var(--line); }
+  .split-panel ul.plist li:first-child { border-top: none; }
+  .cross-note { text-align: center; padding: var(--space-4) var(--space-3) var(--space-5); max-width: 640px; margin: 0 auto; }
+  .cross-note p { font-family: var(--font-mono); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav landing-nav">
+  <div class="container">
+    <div class="brand">JEAN MICHEL IRANKUNDA</div>
+  </div>
+</nav>
+
+<header class="landing-hero container">
+  <div class="name">Swarthmore College &middot; Engineering + Computer Science</div>
+  <h1>Building <span class="o">physical systems</span><br>and <span class="c">digital systems</span>,<br>the same way.</h1>
+  <p class="sub">Every project here follows the same arc: the constraint that boxed the problem in, the decision that broke it open, the build, and the number that proves it worked.</p>
+</header>
+
+<div class="split">
+  <a class="split-panel engr" href="engineering/index.html" data-theme="engr">
+    <span class="eyebrow">Section 01</span>
+    <h2>Engineering <span class="arrow">&rarr;</span></h2>
+    <p>Aeroponic farms, flood sensors, embedded controllers, power electronics. Physical builds, off-grid constraints, hands on the fabrication.</p>
+    <div class="swatch-row">
+      <span class="swatch" style="background:#5a7a9a"></span>
+      <span class="swatch" style="background:#2c2f33"></span>
+      <span class="swatch" style="background:#ff5a1f"></span>
+    </div>
+    <ul class="plist">
+      <li>Off-Grid Aeroponic Farming System</li>
+      <li>Flood Early Warning System — Rwanda</li>
+      <li>Universal Controller (STM32 / KiCad)</li>
+      <li>+ 3 more</li>
+    </ul>
+  </a>
+  <a class="split-panel cs" href="cs/index.html" data-theme="cs">
+    <span class="eyebrow">Section 02</span>
+    <h2>CS / AI <span class="arrow">&rarr;</span></h2>
+    <p>Production AI infrastructure, local inference, fintech automation, digital hardware. Shipped systems, measured outcomes.</p>
+    <div class="swatch-row">
+      <span class="swatch" style="background:#0f141b"></span>
+      <span class="swatch" style="background:#3d7fff"></span>
+      <span class="swatch" style="background:#33ffc7"></span>
+    </div>
+    <ul class="plist">
+      <li>Plurilock AI Content &amp; Automation Platform</li>
+      <li>Local LLM Inference + RAG Pipeline</li>
+      <li>Ocean Mini Agent — Fintech Underwriting</li>
+      <li>+ 4 more</li>
+    </ul>
+  </a>
+</div>
+
+<div class="cross-note">
+  <p class="mono">RISC&#8209;V ALU and the Universal Controller sit on both sides — hardware built with software rigor. <a href="engineering/riscv-alu.html" style="color:#ff5a1f">Engineering view</a> &middot; <a href="cs/riscv-alu.html" style="color:#33ffc7">CS view</a></p>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 Jean Michel Irankunda</span>
+    <span>
+      <a href="about.html">About</a> &middot;
+      <a href="mailto:jiranku1@swarthmore.edu">jiranku1@swarthmore.edu</a> &middot;
+      <a href="https://linkedin.com/in/jean-michel-irankunda" target="_blank" rel="noopener">LinkedIn</a> &middot;
+      <a href="https://github.com/irankunda5" target="_blank" rel="noopener">GitHub</a>
+    </span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

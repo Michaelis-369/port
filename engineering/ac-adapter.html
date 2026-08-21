@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AC Power Adapter Redesign — Jean Michel Irankunda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/base.css">
+<style>
+  .diagram text { font-family: var(--font-mono); fill: var(--ink-dim); }
+  .diagram .lbl { font-size: 12px; }
+  .diagram .lbl-strong { font-size: 12px; fill: var(--ink); font-weight: 600; }
+  table.compare { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.82rem; }
+  table.compare th, table.compare td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; }
+  table.compare th { color: var(--ink); background: var(--bg); }
+  table.compare td { color: var(--ink-dim); }
+</style>
+</head>
+<body data-theme="engr">
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand" href="../index.html">JMI &middot; <strong>ENGR</strong></a>
+    <div class="nav-toggle">
+      <a class="active" href="index.html">Engineering</a>
+      <a href="../cs/index.html">CS / AI</a>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">&larr; All engineering projects</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero container">
+  <span class="eyebrow">Apple Hardware Challenge</span>
+  <h1>AC Power Adapter Redesign</h1>
+  <p style="max-width:620px">A first-principles power path analysis of a laptop AC adapter, with a full loss budget and three GaN-based redesign topologies evaluated on quantitative tradeoffs.</p>
+</header>
+
+<section class="container pullquote">
+  <div class="num">3</div>
+  <div class="label">GaN redesign topologies evaluated on efficiency, EMI, thermal, and cost</div>
+</section>
+
+<section class="container">
+  <div class="arc">
+
+    <div class="arc-step" data-index="01">
+      <span class="arc-kicker">The Constraint</span>
+      <h3>A conventional adapter topology has a loss budget baked into every stage.</h3>
+      <p>Rectification, an LLC resonant converter, synchronous rectification, and output regulation each carry their own conduction, switching, core, and thermal losses. Any redesign proposal had to be justified against a full accounting of where that budget currently goes, not a single headline efficiency number.</p>
+    </div>
+
+    <div class="arc-step" data-index="02">
+      <span class="arc-kicker">The Decision</span>
+      <h3>Quantify the loss budget stage by stage before proposing GaN.</h3>
+      <p>Instead of jumping straight to a wide-bandgap device swap, the analysis mapped losses onto every stage of the power path first — establishing exactly which stages GaN would help, and by how much, before evaluating topology tradeoffs.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+          <g font-family="var(--font-mono)">
+            <rect x="10" y="60" width="150" height="60" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+            <text x="85" y="94" text-anchor="middle" class="lbl">Rectification</text>
+            <text x="85" y="140" text-anchor="middle" class="lbl" fill="#ff9a5a">&minus;1.8% loss</text>
+
+            <line x1="160" y1="90" x2="200" y2="90" stroke="var(--ink-dim)"/>
+
+            <rect x="200" y="60" width="180" height="60" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+            <text x="290" y="88" text-anchor="middle" class="lbl">LLC resonant</text>
+            <text x="290" y="102" text-anchor="middle" class="lbl">converter</text>
+            <text x="290" y="140" text-anchor="middle" class="lbl" fill="#ff9a5a">&minus;3.2% loss (switching)</text>
+
+            <line x1="380" y1="90" x2="420" y2="90" stroke="var(--ink-dim)"/>
+
+            <rect x="420" y="60" width="180" height="60" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+            <text x="510" y="88" text-anchor="middle" class="lbl">Synchronous</text>
+            <text x="510" y="102" text-anchor="middle" class="lbl">rectification</text>
+            <text x="510" y="140" text-anchor="middle" class="lbl" fill="#ff9a5a">&minus;1.1% loss (conduction)</text>
+
+            <line x1="600" y1="90" x2="640" y2="90" stroke="var(--ink-dim)"/>
+
+            <rect x="640" y="60" width="150" height="60" rx="6" fill="none" stroke="var(--accent)" stroke-width="2"/>
+            <text x="715" y="88" text-anchor="middle" class="lbl">Output</text>
+            <text x="715" y="102" text-anchor="middle" class="lbl">regulation</text>
+            <text x="715" y="140" text-anchor="middle" class="lbl" fill="#ff9a5a">&minus;0.9% loss (thermal)</text>
+          </g>
+        </svg>
+        <p class="diagram-caption">Loss budget annotated at each stage of the conventional power path</p>
+      </div>
+    </div>
+
+    <div class="arc-step" data-index="03">
+      <span class="arc-kicker">The Build</span>
+      <h3>Three GaN topologies, compared on more than efficiency.</h3>
+      <p>Each candidate topology was evaluated on efficiency, EMI behavior, thermal performance, and cost — with a full verification and test plan proposed for validating the winning design.</p>
+
+      <table class="compare">
+        <tr><th>Topology</th><th>Efficiency</th><th>EMI</th><th>Thermal</th><th>Cost</th></tr>
+        <tr><td>A &mdash; GaN half-bridge LLC</td><td>High</td><td>Moderate</td><td>Low rise</td><td>Medium</td></tr>
+        <tr><td>B &mdash; GaN totem-pole PFC + LLC</td><td>Highest</td><td>Higher</td><td>Lowest rise</td><td>Higher</td></tr>
+        <tr><td>C &mdash; Hybrid Si/GaN</td><td>Moderate</td><td>Lowest</td><td>Moderate</td><td>Lowest</td></tr>
+      </table>
+    </div>
+
+    <div class="arc-step" data-index="04">
+      <span class="arc-kicker">The Result</span>
+      <h3>A quantitative case for a GaN redesign, ready for prototyping.</h3>
+      <p>The analysis produced a stage-by-stage loss budget, a ranked comparison of three viable GaN topologies, and a complete verification/test plan — the deliverable expected for the Apple Hardware Challenge.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="container">
+  <hr class="hairline">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-2)">
+    <a class="btn" href="lab-instrumentation.html">&larr; Lab Instrumentation</a>
+    <a class="btn" href="riscv-alu.html">RISC-V ALU &rarr;</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 Jean Michel Irankunda</span>
+    <span><a href="index.html">All engineering projects</a></span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

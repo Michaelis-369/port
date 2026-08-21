@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RISC-V ALU — Jean Michel Irankunda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/base.css">
+<style>
+  .diagram text { font-family: var(--font-mono); fill: var(--ink-dim); }
+  .diagram .lbl { font-size: 12px; }
+  .diagram .lbl-strong { font-size: 12px; fill: var(--ink); font-weight: 600; }
+  .coverage-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-family: var(--font-mono); font-size: 0.85rem; }
+  .coverage-list li { display: flex; align-items: center; gap: 8px; }
+  .coverage-list .chk { width: 18px; height: 18px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex: none; }
+</style>
+</head>
+<body data-theme="cs">
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand" href="../index.html">JMI &middot; <strong>CS/AI</strong></a>
+    <div class="nav-toggle">
+      <a href="../engineering/index.html">Engineering</a>
+      <a class="active" href="index.html">CS / AI</a>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">&larr; All CS / AI projects</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero container">
+  <span class="eyebrow">Cross-listed &middot; Digital Hardware</span>
+  <h1>RISC-V ALU</h1>
+  <p style="max-width:620px">A gate-level ALU implementation in Verilog, verified with the same rigor as a production software system &mdash; self-checking testbench, waveform verification, and synthesis analysis.</p>
+  <div class="meta-row">
+    <span><a href="https://github.com/irankunda5/RISC-V-ALU" target="_blank" rel="noopener" style="color:var(--accent)">github.com/irankunda5/RISC-V-ALU</a></span>
+  </div>
+</header>
+
+<section class="container pullquote">
+  <div class="num">7</div>
+  <div class="label">Operations, full functional coverage</div>
+</section>
+
+<section class="container">
+  <div class="arc">
+
+    <div class="arc-step" data-index="01">
+      <span class="arc-kicker">The Constraint</span>
+      <h3>RTL correctness has to be proven, not assumed.</h3>
+      <p>An ALU is the core of any datapath &mdash; a silent off-by-one in a shift or a flag calculation propagates everywhere downstream. The design needed proof of correctness across every operation and edge case, not just a handful of manual test vectors.</p>
+    </div>
+
+    <div class="arc-step" data-index="02">
+      <span class="arc-kicker">The Decision</span>
+      <h3>Build the testbench to check itself.</h3>
+      <p>Rather than eyeball waveform output, the testbench was written to be self-checking &mdash; generating randomized and edge-case vectors, computing expected results independently, and flagging any mismatch automatically.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+          <text x="10" y="20" class="lbl-strong">ALU block diagram</text>
+          <rect x="20" y="40" width="90" height="50" rx="4" fill="none" stroke="var(--steel)" stroke-width="2"/>
+          <text x="65" y="70" text-anchor="middle" class="lbl">Operand A</text>
+          <rect x="20" y="110" width="90" height="50" rx="4" fill="none" stroke="var(--steel)" stroke-width="2"/>
+          <text x="65" y="140" text-anchor="middle" class="lbl">Operand B</text>
+
+          <rect x="150" y="75" width="90" height="50" rx="4" fill="none" stroke="var(--ink-dim)" stroke-width="2"/>
+          <text x="195" y="105" text-anchor="middle" class="lbl">Opcode</text>
+
+          <rect x="280" y="30" width="200" height="140" rx="8" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+          <text x="380" y="90" text-anchor="middle" class="lbl-strong">ALU core</text>
+          <text x="380" y="110" text-anchor="middle" class="lbl">ADD SUB AND OR</text>
+          <text x="380" y="126" text-anchor="middle" class="lbl">XOR SLT SHIFT</text>
+
+          <line x1="110" y1="65" x2="280" y2="65" stroke="var(--ink-dim)"/>
+          <line x1="110" y1="135" x2="280" y2="135" stroke="var(--ink-dim)"/>
+          <line x1="240" y1="100" x2="280" y2="100" stroke="var(--ink-dim)"/>
+
+          <line x1="480" y1="90" x2="540" y2="90" stroke="var(--accent)" stroke-width="2"/>
+          <polygon points="540,84 540,96 552,90" fill="var(--accent)"/>
+          <rect x="552" y="60" width="120" height="60" rx="4" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <text x="612" y="86" text-anchor="middle" class="lbl">Result</text>
+          <text x="612" y="102" text-anchor="middle" class="lbl">+ flags</text>
+        </svg>
+        <p class="diagram-caption">Inputs A/B and opcode select feed the ALU core; result and flags exit as a single bus</p>
+      </div>
+    </div>
+
+    <div class="arc-step" data-index="03">
+      <span class="arc-kicker">The Build</span>
+      <h3>Simulated, waveform-verified, and synthesized to gates.</h3>
+      <ul>
+        <li>Verilog RTL implementing ADD, SUB, AND, OR, XOR, SLT, and shift operations</li>
+        <li>Self-checking testbench with randomized and edge-case vectors, full functional coverage</li>
+        <li>Simulated in Icarus Verilog, waveform-verified in GTKWave</li>
+        <li>Synthesized to a gate-level netlist in Yosys with critical path and area analysis</li>
+      </ul>
+
+      <div class="code-block">
+<span class="cm">// alu.v — opcode-selected ALU core (excerpt)</span>
+<span class="kw">module</span> alu (
+  input  [31:0] a, b,
+  input  [3:0]  opcode,
+  output reg [31:0] result,
+  output reg zero, overflow
+);
+  always @(*) begin
+    case (opcode)
+      4'b0000: result = a + b;               <span class="cm">// ADD</span>
+      4'b0001: result = a - b;               <span class="cm">// SUB</span>
+      4'b0010: result = a & b;               <span class="cm">// AND</span>
+      4'b0011: result = a | b;               <span class="cm">// OR</span>
+      4'b0100: result = a ^ b;               <span class="cm">// XOR</span>
+      4'b0101: result = ($signed(a) < $signed(b)) ? 1 : 0; <span class="cm">// SLT</span>
+      4'b0110: result = a << b[4:0];         <span class="cm">// SLL</span>
+      4'b0111: result = a >> b[4:0];         <span class="cm">// SRL</span>
+      default: result = 32'b0;
+    endcase
+    zero = (result == 32'b0);
+  end
+endmodule</div>
+
+      <div class="diagram">
+        <div class="diagram-caption" style="margin:0 0 10px;text-align:left">Testbench functional coverage</div>
+        <ul class="coverage-list">
+          <li><span class="chk">&check;</span> ADD &mdash; random + overflow edge</li>
+          <li><span class="chk">&check;</span> SUB &mdash; random + underflow edge</li>
+          <li><span class="chk">&check;</span> AND / OR / XOR &mdash; bitwise sweep</li>
+          <li><span class="chk">&check;</span> SLT &mdash; signed boundary cases</li>
+          <li><span class="chk">&check;</span> SLL / SRL &mdash; shift amount 0&ndash;31</li>
+          <li><span class="chk">&check;</span> Zero flag &mdash; all-zero result</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="arc-step" data-index="04">
+      <span class="arc-kicker">The Result</span>
+      <h3>Full functional coverage, gate-level critical path identified.</h3>
+      <p>Every operation passes the self-checking testbench across randomized and edge-case vectors, with behavior confirmed in GTKWave and a synthesized netlist analyzed for critical path and area in Yosys.</p>
+      <a class="btn btn-solid" href="https://github.com/irankunda5/RISC-V-ALU" target="_blank" rel="noopener">View full source on GitHub &rarr;</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="container">
+  <hr class="hairline">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-2)">
+    <a class="btn" href="ocean-mini-agent.html">&larr; Ocean Mini Agent</a>
+    <a class="btn" href="aubo-inventory.html">Aubo Inventory System &rarr;</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 Jean Michel Irankunda</span>
+    <span><a href="index.html">All CS / AI projects</a></span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

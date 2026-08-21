@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RISC-V ALU — Jean Michel Irankunda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/base.css">
+<style>
+  .diagram text { font-family: var(--font-mono); fill: var(--ink-dim); }
+  .diagram .lbl { font-size: 12px; }
+  .diagram .lbl-strong { font-size: 12px; fill: var(--ink); font-weight: 600; }
+</style>
+</head>
+<body data-theme="engr">
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand" href="../index.html">JMI &middot; <strong>ENGR</strong></a>
+    <div class="nav-toggle">
+      <a class="active" href="index.html">Engineering</a>
+      <a href="../cs/index.html">CS / AI</a>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">&larr; All engineering projects</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero container">
+  <span class="eyebrow">Cross-listed &middot; Digital Hardware</span>
+  <h1>RISC-V ALU</h1>
+  <p style="max-width:620px">A gate-level digital hardware project that sits equally on the Engineering and CS sides of this portfolio &mdash; RTL design with the rigor of a verified software system.</p>
+</header>
+
+<section class="container">
+  <div class="diagram">
+    <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+      <text x="10" y="20" class="lbl-strong">ALU block diagram</text>
+      <rect x="20" y="50" width="90" height="100" rx="4" fill="none" stroke="var(--steel)" stroke-width="2"/>
+      <text x="65" y="95" text-anchor="middle" class="lbl">Operand A</text>
+
+      <rect x="20" y="170" width="90" height="24" rx="4" fill="none" stroke="var(--steel)" stroke-width="2"/>
+      <text x="65" y="186" text-anchor="middle" class="lbl">Operand B</text>
+
+      <rect x="150" y="50" width="90" height="70" rx="4" fill="none" stroke="var(--ink-dim)" stroke-width="2"/>
+      <text x="195" y="90" text-anchor="middle" class="lbl">Opcode</text>
+      <text x="195" y="104" text-anchor="middle" class="lbl">select</text>
+
+      <rect x="280" y="40" width="200" height="140" rx="8" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+      <text x="380" y="100" text-anchor="middle" class="lbl-strong">ALU core</text>
+      <text x="380" y="120" text-anchor="middle" class="lbl">ADD SUB AND OR</text>
+      <text x="380" y="136" text-anchor="middle" class="lbl">XOR SLT SHIFT</text>
+
+      <line x1="110" y1="95" x2="280" y2="95" stroke="var(--ink-dim)"/>
+      <line x1="110" y1="182" x2="280" y2="140" stroke="var(--ink-dim)"/>
+      <line x1="240" y1="85" x2="280" y2="85" stroke="var(--ink-dim)"/>
+
+      <line x1="480" y1="90" x2="560" y2="90" stroke="var(--accent)" stroke-width="2"/>
+      <polygon points="560,84 560,96 572,90" fill="var(--accent)"/>
+      <rect x="572" y="60" width="110" height="60" rx="4" fill="none" stroke="var(--accent)" stroke-width="2"/>
+      <text x="627" y="86" text-anchor="middle" class="lbl">Result</text>
+      <text x="627" y="102" text-anchor="middle" class="lbl">+ flags</text>
+    </svg>
+    <p class="diagram-caption">ADD / SUB / AND / OR / XOR / SLT / shift &mdash; opcode-selected ALU core with flag output</p>
+  </div>
+
+  <p>Verilog RTL design with a self-checking testbench, simulated in Icarus Verilog, waveform-verified in GTKWave, and synthesized to a gate-level netlist in Yosys with critical path and area analysis.</p>
+
+  <div style="display:flex;gap:var(--space-2);flex-wrap:wrap;margin-top:var(--space-2)">
+    <a class="btn btn-solid" href="../cs/riscv-alu.html">Full write-up &amp; code snippet (CS side) &rarr;</a>
+    <a class="btn" href="https://github.com/irankunda5/RISC-V-ALU" target="_blank" rel="noopener">View on GitHub</a>
+  </div>
+</section>
+
+<section class="container">
+  <hr class="hairline">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-2)">
+    <a class="btn" href="ac-adapter.html">&larr; AC Power Adapter Redesign</a>
+    <a class="btn" href="index.html">All engineering projects</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 Jean Michel Irankunda</span>
+    <span><a href="index.html">All engineering projects</a></span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

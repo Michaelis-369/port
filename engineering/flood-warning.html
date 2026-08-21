@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flood Early Warning System — Jean Michel Irankunda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/base.css">
+<style>
+  .diagram text { font-family: var(--font-mono); fill: var(--ink-dim); }
+  .diagram .lbl { font-size: 12px; }
+  .diagram .lbl-strong { font-size: 12px; fill: var(--ink); font-weight: 600; }
+  .badge-row { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-top: var(--space-2); }
+</style>
+</head>
+<body data-theme="engr">
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand" href="../index.html">JMI &middot; <strong>ENGR</strong></a>
+    <div class="nav-toggle">
+      <a class="active" href="index.html">Engineering</a>
+      <a href="../cs/index.html">CS / AI</a>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">&larr; All engineering projects</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero container">
+  <span class="eyebrow">Community infrastructure &middot; Rwanda</span>
+  <h1>Flood Early Warning System</h1>
+  <p style="max-width:620px">A sensor-to-alert pipeline and diversion channel designed for Ndera, Kigali — a community exposed to seasonal flooding that destroys crops and property with little warning.</p>
+  <div class="meta-row">
+    <span>Sole designer</span>
+    <span><strong>2024</strong></span>
+    <span>Ndera, Kigali, Rwanda</span>
+  </div>
+</header>
+
+<section class="container pullquote">
+  <div class="num">30+</div>
+  <div class="label">Schools reached at Kigali Science Day 2024</div>
+</section>
+
+<section class="container">
+  <div class="arc">
+
+    <div class="arc-step" data-index="01">
+      <span class="arc-kicker">The Constraint</span>
+      <h3>No existing warning infrastructure, and minutes matter.</h3>
+      <p>Ndera floods seasonally with little advance notice to farmers. Any warning system needed to be low-cost, low-maintenance, and reliable enough to trigger real evacuation and crop-protection decisions — not just a sensor reading nobody trusts.</p>
+    </div>
+
+    <div class="arc-step" data-index="02">
+      <span class="arc-kicker">The Decision</span>
+      <h3>Filter noisy readings before they ever reach a threshold check.</h3>
+      <p>Raw water-level sensor data is noisy enough to trigger false alarms. Rather than tune the threshold to compensate, the decision was to add a multi-sample noise-filtering stage before threshold detection — trading a small amount of latency for alerts people can actually trust.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 800 140" xmlns="http://www.w3.org/2000/svg">
+          <g font-family="var(--font-mono)">
+            <rect x="10" y="40" width="140" height="60" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+            <text x="80" y="65" text-anchor="middle" class="lbl">Water-level</text>
+            <text x="80" y="79" text-anchor="middle" class="lbl">sensor</text>
+
+            <line x1="150" y1="70" x2="200" y2="70" stroke="var(--accent)" stroke-width="2"/>
+            <polygon points="200,64 200,76 212,70" fill="var(--accent)"/>
+
+            <rect x="212" y="40" width="140" height="60" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+            <text x="282" y="65" text-anchor="middle" class="lbl">Multi-sample</text>
+            <text x="282" y="79" text-anchor="middle" class="lbl">noise filter</text>
+
+            <line x1="352" y1="70" x2="402" y2="70" stroke="var(--accent)" stroke-width="2"/>
+            <polygon points="402,64 402,76 414,70" fill="var(--accent)"/>
+
+            <rect x="414" y="40" width="140" height="60" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+            <text x="484" y="65" text-anchor="middle" class="lbl">MCU threshold</text>
+            <text x="484" y="79" text-anchor="middle" class="lbl">detection</text>
+
+            <line x1="554" y1="70" x2="604" y2="70" stroke="var(--accent)" stroke-width="2"/>
+            <polygon points="604,64 604,76 616,70" fill="var(--accent)"/>
+
+            <rect x="616" y="40" width="80" height="60" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+            <text x="656" y="70" text-anchor="middle" class="lbl">GSM</text>
+
+            <line x1="696" y1="70" x2="720" y2="70" stroke="var(--accent)" stroke-width="2"/>
+            <polygon points="720,64 720,76 732,70" fill="var(--accent)"/>
+
+            <rect x="732" y="40" width="58" height="60" rx="6" fill="none" stroke="var(--accent)" stroke-width="2"/>
+            <text x="761" y="66" text-anchor="middle" class="lbl">SMS</text>
+            <text x="761" y="80" text-anchor="middle" class="lbl">alert</text>
+          </g>
+        </svg>
+        <p class="diagram-caption">Signal chain: sensor &rarr; noise filter &rarr; threshold detection &rarr; GSM &rarr; SMS to farmers</p>
+      </div>
+    </div>
+
+    <div class="arc-step" data-index="03">
+      <span class="arc-kicker">The Build</span>
+      <h3>A validated diversion channel, not just an alert.</h3>
+      <ul>
+        <li>Water-level sensor with multi-sample filtering and microcontroller threshold detection</li>
+        <li>Automated GSM SMS alert triggered on threshold breach</li>
+        <li>Diversion channel and retention pit sized with hydraulic calculations for slope and cross-section</li>
+        <li>Scale hydraulic model pour tests to confirm channel geometry before real-world construction</li>
+      </ul>
+
+      <div class="diagram">
+        <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+          <text x="20" y="24" class="lbl-strong">Site plan — diversion geometry</text>
+          <path d="M 40 60 Q 200 40 340 100 T 640 90" fill="none" stroke="var(--steel)" stroke-width="10" opacity="0.5"/>
+          <text x="60" y="50" class="lbl">Seasonal flow path</text>
+          <path d="M 340 100 L 420 170 L 560 175" fill="none" stroke="var(--accent)" stroke-width="8"/>
+          <text x="430" y="195" class="lbl" fill="var(--accent)">Diversion channel</text>
+          <ellipse cx="600" cy="175" rx="46" ry="24" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <text x="600" y="179" text-anchor="middle" class="lbl">Retention pit</text>
+          <circle cx="250" cy="70" r="5" fill="var(--ink-dim)"/>
+          <text x="260" y="74" class="lbl">Sensor node</text>
+        </svg>
+        <p class="diagram-caption">Diversion channel and retention pit, geometry confirmed with scale hydraulic pour tests</p>
+      </div>
+    </div>
+
+    <div class="arc-step" data-index="04">
+      <span class="arc-kicker">The Result</span>
+      <h3>Presented to city council. Selected for construction.</h3>
+      <p>The system and channel design were presented to Kigali City Council and to more than 30 schools at Science Day 2024, and the design was selected for community construction.</p>
+      <div class="badge-row">
+        <span class="badge">Presented to Kigali City Council</span>
+        <span class="badge">Selected for community construction</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="container">
+  <hr class="hairline">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-2)">
+    <a class="btn" href="aeroponics.html">&larr; Aeroponic Farming System</a>
+    <a class="btn" href="universal-controller.html">Universal Controller &rarr;</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 Jean Michel Irankunda</span>
+    <span><a href="index.html">All engineering projects</a></span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

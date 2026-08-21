@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ocean Mini Agent — Jean Michel Irankunda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/base.css">
+<style>
+  .diagram text { font-family: var(--font-mono); fill: var(--ink-dim); }
+  .diagram .lbl { font-size: 11.5px; }
+  .diagram .lbl-strong { font-size: 12px; fill: var(--ink); font-weight: 600; }
+  .formula { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-2); font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink); }
+</style>
+</head>
+<body data-theme="cs">
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand" href="../index.html">JMI &middot; <strong>CS/AI</strong></a>
+    <div class="nav-toggle">
+      <a href="../engineering/index.html">Engineering</a>
+      <a class="active" href="index.html">CS / AI</a>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">&larr; All CS / AI projects</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero container">
+  <span class="eyebrow">Fintech &middot; Automation</span>
+  <h1>Ocean Mini Agent</h1>
+  <p style="max-width:620px">An end-to-end SME trade finance underwriting engine bridging cash-upfront suppliers and credit-seeking buyers, with automated payment execution.</p>
+</header>
+
+<section class="container pullquote">
+  <div class="num">2</div>
+  <div class="label">Sequential decision gates, each with quantitative thresholds</div>
+</section>
+
+<section class="container">
+  <div class="arc">
+
+    <div class="arc-step" data-index="01">
+      <span class="arc-kicker">The Constraint</span>
+      <h3>Underwriting has to be fast, auditable, and defensible.</h3>
+      <p>Extending credit to SMEs requires a decision process that's consistent, explainable, and fast enough to not stall a trade &mdash; while still being rigorous enough to bound risk on both the supplier and buyer side.</p>
+    </div>
+
+    <div class="arc-step" data-index="02">
+      <span class="arc-kicker">The Decision</span>
+      <h3>Two sequential gates, each a hard quantitative filter.</h3>
+      <p>Rather than a single blended risk score, the logic is split into two sequential gates &mdash; eligibility, then financial health &mdash; each with explicit numeric thresholds, so every approval, rejection, or request-for-info comes with a traceable reason.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 780 420" xmlns="http://www.w3.org/2000/svg">
+          <rect x="300" y="10" width="180" height="50" rx="8" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <text x="390" y="40" text-anchor="middle" class="lbl-strong">Application</text>
+
+          <line x1="390" y1="60" x2="390" y2="90" stroke="var(--ink-dim)"/>
+          <rect x="240" y="90" width="300" height="90" rx="8" fill="none" stroke="var(--steel)" stroke-width="2"/>
+          <text x="390" y="110" text-anchor="middle" class="lbl-strong">Gate 1 &mdash; Eligibility</text>
+          <text x="390" y="128" text-anchor="middle" class="lbl">Revenue &ge; $1M &middot; Tenure &ge; 2 yrs</text>
+          <text x="390" y="144" text-anchor="middle" class="lbl">Developed market &middot; Physical goods</text>
+
+          <line x1="300" y1="180" x2="180" y2="230" stroke="#ff6b6b"/>
+          <text x="200" y="220" class="lbl" fill="#ff6b6b">fail</text>
+          <rect x="60" y="230" width="180" height="46" rx="6" fill="none" stroke="#ff6b6b" stroke-width="2"/>
+          <text x="150" y="258" text-anchor="middle" class="lbl" fill="#ff6b6b">Reject (with reason)</text>
+
+          <line x1="390" y1="180" x2="390" y2="230" stroke="var(--accent)"/>
+          <text x="405" y="210" class="lbl" fill="var(--accent)">pass</text>
+          <rect x="240" y="230" width="300" height="110" rx="8" fill="none" stroke="var(--steel)" stroke-width="2"/>
+          <text x="390" y="250" text-anchor="middle" class="lbl-strong">Gate 2 &mdash; Financial health</text>
+          <text x="390" y="268" text-anchor="middle" class="lbl">Debt ratio &le; 10% &middot; Gross margin &ge; 30%</text>
+          <text x="390" y="284" text-anchor="middle" class="lbl">Cash runway &gt; 6 mo &middot; ADB liquidity</text>
+          <text x="390" y="302" text-anchor="middle" class="lbl" fill="var(--ink-dim)">(borderline &rarr; request info)</text>
+
+          <line x1="480" y1="340" x2="600" y2="230" stroke="#ffd166"/>
+          <text x="560" y="270" class="lbl" fill="#ffd166">borderline</text>
+          <rect x="560" y="170" width="180" height="46" rx="6" fill="none" stroke="#ffd166" stroke-width="2"/>
+          <text x="650" y="198" text-anchor="middle" class="lbl" fill="#ffd166">Request info</text>
+
+          <line x1="390" y1="340" x2="390" y2="380" stroke="var(--accent)"/>
+          <text x="405" y="365" class="lbl" fill="var(--accent)">pass</text>
+          <rect x="240" y="380" width="300" height="34" rx="6" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+          <text x="390" y="402" text-anchor="middle" class="lbl-strong" fill="var(--accent)">Approve + credit terms</text>
+        </svg>
+        <p class="diagram-caption">Two-gate underwriting decision tree &mdash; each branch returns a structured outcome with reasoning</p>
+      </div>
+    </div>
+
+    <div class="arc-step" data-index="03">
+      <span class="arc-kicker">The Build</span>
+      <h3>Credit sizing formulas, and a live payment integration behind them.</h3>
+      <div class="formula">Credit limit = min(10 &times; 90-day ADB adjusted for volatility, 20% &times; annual revenue)</div>
+      <div class="formula" style="margin-top:8px">Repayment = Total limit / 16 weeks &middot; weekly direct debit</div>
+      <ul style="margin-top:var(--space-2)">
+        <li>Three structured outcomes &mdash; approve / reject / request-info &mdash; each returned with explicit reasoning</li>
+        <li>Flask backend acting as a secure credential bridge</li>
+        <li>n8n workflow engine for auditable branching and full execution history</li>
+        <li>Live GoCardless sandbox integration for direct debit payment automation</li>
+      </ul>
+
+      <div class="diagram">
+        <svg viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg">
+          <g font-family="var(--font-mono)">
+            <rect x="10" y="30" width="120" height="50" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+            <text x="70" y="60" text-anchor="middle" class="lbl">Frontend</text>
+            <line x1="130" y1="55" x2="180" y2="55" stroke="var(--accent)"/>
+            <rect x="180" y="30" width="120" height="50" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+            <text x="240" y="60" text-anchor="middle" class="lbl">Flask</text>
+            <line x1="300" y1="55" x2="350" y2="55" stroke="var(--accent)"/>
+            <rect x="350" y="30" width="120" height="50" rx="6" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+            <text x="410" y="60" text-anchor="middle" class="lbl">n8n workflow</text>
+            <line x1="470" y1="55" x2="520" y2="55" stroke="var(--accent)"/>
+            <rect x="520" y="30" width="150" height="50" rx="6" fill="none" stroke="var(--steel)" stroke-width="2"/>
+            <text x="595" y="60" text-anchor="middle" class="lbl">GoCardless</text>
+          </g>
+        </svg>
+        <p class="diagram-caption">Frontend &rarr; Flask (credential bridge) &rarr; n8n (auditable logic) &rarr; GoCardless sandbox</p>
+      </div>
+    </div>
+
+    <div class="arc-step" data-index="04">
+      <span class="arc-kicker">The Result</span>
+      <h3>Every decision is explainable and payment is automated end to end.</h3>
+      <p>The engine produces one of three structured outcomes for every application, each with a returned reason, and executes approved repayment schedules automatically through a live GoCardless sandbox integration &mdash; underwriting logic that's fast, consistent, and auditable.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="container">
+  <hr class="hairline">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-2)">
+    <a class="btn" href="local-llm-rag.html">&larr; Local LLM &amp; RAG Pipeline</a>
+    <a class="btn" href="riscv-alu.html">RISC-V ALU &rarr;</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 Jean Michel Irankunda</span>
+    <span><a href="index.html">All CS / AI projects</a></span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

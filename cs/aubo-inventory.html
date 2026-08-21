@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aubo Robotics Inventory Management System — Jean Michel Irankunda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/base.css">
+<style>
+  .ui-shell { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; font-family: var(--font-mono); font-size: 0.8rem; }
+  .ui-topbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--line); }
+  .role-badge { padding: 3px 10px; border-radius: 999px; font-size: 0.72rem; }
+  .role-badge.sup { background: var(--accent-soft); color: var(--accent); }
+  .ui-search { margin: 12px 16px; padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); color: var(--ink-dim); }
+  table.inv { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  table.inv th, table.inv td { padding: 8px 16px; text-align: left; border-top: 1px solid var(--line); }
+  table.inv th { color: var(--ink-dim); font-weight: 500; border-top: none; }
+  table.inv td { color: var(--ink); }
+  .stat { color: var(--accent); }
+</style>
+</head>
+<body data-theme="cs">
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand" href="../index.html">JMI &middot; <strong>CS/AI</strong></a>
+    <div class="nav-toggle">
+      <a href="../engineering/index.html">Engineering</a>
+      <a class="active" href="index.html">CS / AI</a>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">&larr; All CS / AI projects</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero container">
+  <span class="eyebrow">Deployed tool</span>
+  <h1>Aubo Robotics Inventory<br>Management System</h1>
+  <p style="max-width:620px">A zero-dependency, fully offline inventory system &mdash; a single deployable HTML file with no server, no install, and no external runtime.</p>
+</header>
+
+<section class="container pullquote">
+  <div class="num">1</div>
+  <div class="label">Deployable HTML file &mdash; no server, no install</div>
+</section>
+
+<section class="container">
+  <div class="arc">
+
+    <div class="arc-step" data-index="01">
+      <span class="arc-kicker">The Constraint</span>
+      <h3>No server, no install, no internet dependency &mdash; and still real access control.</h3>
+      <p>The deployment environment couldn't assume a server, a package manager, or a reliable connection, but the tool still needed role separation, session security, and safe transaction handling at scale &mdash; over 10,000 items.</p>
+    </div>
+
+    <div class="arc-step" data-index="02">
+      <span class="arc-kicker">The Decision</span>
+      <h3>Build the whole system as one self-contained file.</h3>
+      <p>Rather than a client-server split, the entire application &mdash; UI, transaction engine, RBAC, and session logic &mdash; was built to run from a single HTML file with zero external dependencies, deployable by copying one file.</p>
+    </div>
+
+    <div class="arc-step" data-index="03">
+      <span class="arc-kicker">The Build</span>
+      <h3>Full transaction engine with guardrails against bad data.</h3>
+      <ul>
+        <li>Role-based access control &mdash; Supervisor and Operator roles</li>
+        <li>5-minute session timeout</li>
+        <li>Full transaction engine with negative-inventory and duplicate-entry prevention</li>
+        <li>Real-time search across 10,000+ items</li>
+        <li>Single deployable HTML file, zero external runtime dependency</li>
+      </ul>
+
+      <div class="diagram" style="padding:0">
+        <div class="ui-shell">
+          <div class="ui-topbar">
+            <span>Aubo Inventory &mdash; Warehouse 4</span>
+            <span class="role-badge sup">Supervisor</span>
+          </div>
+          <div class="ui-search">&#128269; Search 10,482 items&hellip;</div>
+          <table class="inv">
+            <tr><th>SKU</th><th>Item</th><th>Qty</th><th>Status</th></tr>
+            <tr><td>AR-1042</td><td>Servo actuator, 6DOF</td><td>212</td><td class="stat">OK</td></tr>
+            <tr><td>AR-1043</td><td>End effector gripper</td><td>4</td><td class="stat">Low stock</td></tr>
+            <tr><td>AR-1044</td><td>Encoder cable, 2m</td><td>0</td><td style="color:#ff6b6b">Blocked &mdash; neg. prevented</td></tr>
+          </table>
+        </div>
+        <p class="diagram-caption">Dashboard mockup &mdash; role badge, live search, transaction guardrails</p>
+      </div>
+    </div>
+
+    <div class="arc-step" data-index="04">
+      <span class="arc-kicker">The Result</span>
+      <h3>Deployed with zero infrastructure overhead.</h3>
+      <p>The system runs entirely offline from a single file, with real-time search across a 10,000+ item catalog and transaction integrity enforced without a backend to maintain.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="container">
+  <hr class="hairline">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-2)">
+    <a class="btn" href="riscv-alu.html">&larr; RISC-V ALU</a>
+    <a class="btn" href="ml-curriculum.html">Self-Directed ML Curriculum &rarr;</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 Jean Michel Irankunda</span>
+    <span><a href="index.html">All CS / AI projects</a></span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
